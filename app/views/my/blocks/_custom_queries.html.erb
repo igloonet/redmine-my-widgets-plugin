@@ -3,7 +3,7 @@
 %>
 	<h3><%= query.name %></h3>
 
-	<%= render :partial => 'issues/list', :locals => { :issues => Issue.find(:all, :include => [:status, :project], :conditions => query.statement) } %>
+	<%= render :partial => 'issues/list_simple', :locals => { :issues => Issue.find(:all, :include => [:status, :project], :conditions => query.statement) } %>
 
 
 <% end %>
