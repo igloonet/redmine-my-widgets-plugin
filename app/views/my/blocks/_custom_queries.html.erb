@@ -17,11 +17,10 @@
   </thead>
   <tbody>
     <%
-    visible = ARCondition.new(["is_public = ? OR user_id = ?", true, (User.current.logged? ? User.current.id : 0)])
     @sidebar_queries = Query.find(:all, {
       :select => 'id, name',
       :order => "name ASC",
-      :conditions => visible.conditions,
+      :conditions => ["is_public = ? OR user_id = ?", true, (User.current.logged? ? User.current.id : 0)],
     })
   %>
     <% @sidebar_queries.each do |query|
