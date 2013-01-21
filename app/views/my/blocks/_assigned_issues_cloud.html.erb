@@ -6,7 +6,7 @@
       data = ActiveRecord::Base.connection.select_all("select a.id as assigned_to_id, count(i.id) as total 
                                                 from #{Issue.table_name} i, #{IssueStatus.table_name} s, #{User.table_name} a
                                                 where i.status_id=s.id and i.assigned_to_id=a.id and s.is_closed = false
-                                                and a.id in (0"+users.collect{|u| u.id}.join(",")+")
+                                                and a.id in ("+users.collect{|u| u.id}.join(",")+")
                                                 group by a.id").index_by { |x| x["assigned_to_id"].to_i }
 
       smallest = 6
