@@ -2,12 +2,11 @@
 <% to = Date.today.at_end_of_week %>
 <% results = [] %>
 
-<% total_hours_sum = TimeEntry.sum(:hours, :conditions => ["user_id = ? AND spent_on <= ? AND spent_on >= ?", User.current.id, to, from])
+<% total_hours_sum = TimeEntry.where("user_id = ? AND spent_on <= ? AND spent_on >= ?", User.current.id, to, from).sum('hours')
    #set to infinity so we get 0 when counting relative values
    total_hours_sum = 1.0 / 0 if total_hours_sum <= 0 %>
 
-<% sums_per_project = TimeEntry.sum(:hours, :conditions => ["user_id = ? AND spent_on <= ? AND spent_on >= ?", User.current.id, to, from],
-  :group => '`issues`.`project_id`', :include => {:issue => :project}) %>
+<% sums_per_project = TimeEntry.where("user_id = ? AND spent_on <= ? AND spent_on >= ?", User.current.id, to, from).includes(:issue, :project).group('`issues`.`project_id`').sum('hours') %>
 
 <% sums_per_project.each do |project_id, hours|
     results.push [project_id, Project.find_by_id(project_id).name, (100 * hours/total_hours_sum).to_i, hours]
