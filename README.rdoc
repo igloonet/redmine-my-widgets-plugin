@@ -1,6 +1,15 @@
-= my widgets
+Redmine my widgets plugin
 
 This plugin provides instances of Redmine additional widgets on the "My page" page.
+
+List of widgets: Assigned issues cloud (list of users, which have name size depending on count of assigned issues)
+Project issues cloud (list of projects, which have name size depending on count of issues)
+Recent status changes (table of statuses changed within 24 hours)
+Time entry overview (overview of the time division)
+Open versions (table of versions)
+Issues to accept
+
+Added commits from https://github.com/planio-gmbh/redmine-my-widgets-plugin (adapt for Redmine 3).
 
 Created by Gossamer Threads Inc. (http://www.gossamer-threads.com)
 Primary developer: Brad Beattie
